@@ -1,0 +1,48 @@
+mythic-mobs:
+  enabled: true
+  mobs:
+    EXAMPLE_SKELETAL_KNIGHT:
+      mythic-mob: SkeletalKnight
+      type: INCREASE # INCREASE | DECREASE
+      mode: PROXIMITY # ATTACK | PROXIMITY
+      radiation: 5
+crack-shot:
+  enabled: true
+  weapons:
+    EXAMPLE_AK-47:
+      weapon: AK-47
+      type: INCREASE # INCREASE | DECREASE
+      mode: PROXIMITY # ATTACK | PROXIMITY
+      radiation: 5
+      radius: 3
+  grenades:
+    EXAMPLE_GRENADE:
+      grenade: GRENADE
+      type: INCREASE # INCREASE | DECREASE
+      radiation: 5
+      radius: 7
+      duration: 10 # in Seconds
+weapon-mechanics:
+  enabled: false
+  weapons:
+    EXAMPLE_AK-47:
+      weapon: AK-47
+      type: INCREASE # INCREASE | DECREASE
+      mode: PROXIMITY # ATTACK | PROXIMITY
+      radiation: 5
+      radius: 3
+  grenades:
+    EXAMPLE_GRENADE:
+      grenade: GRENADE
+      type: INCREASE # INCREASE | DECREASE
+      radiation: 5
+      radius: 7
+      duration: 10 # in Seconds
+brewery:
+  enabled: true
+  brews:
+    EXAMPLE_BREW:
+      equation: EQUAL_OR_MORE # EQUAL | LESS | MORE | EQUAL_OR_MORE | EQUAL_OR_LESS
+      alcohol: 5
+      type: DECREASE
+      radiation: 15

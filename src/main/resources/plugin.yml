@@ -1,0 +1,14 @@
+name: MortisNuclearCraft
+version: '${project.version}'
+main: me.none030.mortisnuclearcraft.MortisNuclearCraft
+api-version: 1.13
+softdepend:
+  - MythicMobs
+  - CrackShot
+  - WeaponMechanics
+  - Brewery
+  - QualityArmoryVehicles
+commands:
+  nuclearcraft:
+    aliases:
+      - mortisnuclearcraft

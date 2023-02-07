@@ -1,0 +1,56 @@
+settings:
+  radiusX: 3
+  radiusY: 3
+  radiusZ: 3
+structures:
+  CENTRIFUGE:
+    core-block: FURNACE
+    439a6801-30a5-45d9-92b3-5433da944b91:
+      material: FURNACE
+      vector: 0, 0, 0
+    61dd1e8f-349e-4f88-8f4b-064bb8e66ef2:
+      material: IRON_BLOCK
+      vector: 0, 1, 0
+    3ef9c2ae-7829-4eb7-a555-8bddb2c44e59:
+      material: IRON_BLOCK
+      vector: 0, 2, 0
+  HYDROGEN_BOMB:
+    core-block: COAL_BLOCK
+    2aecde5a-f979-469a-ba6b-4ed00e6438b3:
+      material: IRON_BLOCK
+      vector: -1, -1, 0
+    31b22e48-94bd-471e-b977-594c178db94d:
+      material: IRON_BLOCK
+      vector: 0, -1, -1
+    85240edc-5960-4d9b-ac5f-44ba13a701e2:
+      material: IRON_BLOCK
+      vector: 0, -1, 0
+    54065950-1415-4253-86c4-28ef5ae7c62e:
+      material: IRON_BLOCK
+      vector: 0, -1, 1
+    5ee1235e-e212-4588-8d53-8fd2a2dbd082:
+      material: COAL_BLOCK
+      vector: 0, 0, 0
+    9f0ea959-5fb4-4249-8d22-72f003e9c865:
+      material: IRON_BLOCK
+      vector: 1, -1, 0
+  REACTOR:
+    core-block: FURNACE
+    4aabc6cc-9822-4663-9b06-be267d149251:
+      material: CAULDRON
+      vector: -1, -1, 0
+    4622f76c-cedb-4644-826b-929634ebc2ac:
+      material: CAULDRON
+      vector: 0, -1, -1
+    04d93f99-9915-4a69-96d2-19d15ac2a316:
+      material: IRON_BLOCK
+      vector: 0, -1, 0
+    e25260ac-d105-49f2-81dc-885f6ea115f7:
+      material: CAULDRON
+      vector: 0, -1, 1
+    66c8216f-36e1-48e1-bb4e-403b0af8d767:
+      material: FURNACE
+      vector: 0, 0, 0
+    e67535ea-deff-4d02-b350-ec801ab2aa81:
+      material: CAULDRON
+      vector: 1, -1, 0
