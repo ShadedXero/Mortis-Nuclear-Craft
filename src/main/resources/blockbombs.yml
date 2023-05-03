@@ -1,0 +1,29 @@
+block-bombs:
+  messages:
+    time-left: "&a%time% &eleft for the bomb to explode"
+    timer-not-set: "&aTimer isn't set up"
+    timer-set-expired: "&eYour time setting time just expired"
+    timer-set: "&eThe timer has been set"
+    set-timer: "&eType the time you want to set\nUse 's' for seconds | 'm' for minutes | 'h' for hours"
+    redstone-mode: "&eRedstone mode activated"
+    manual-mode: "&eManual mode activated"
+    bomb-built: "&eThe bomb has been constructed"
+  menu-items:
+    filter: FILTER
+    redstone-mode: REDSTONE_MODE
+    manual-mode: MANUAL_MODE
+    timer: TIMER
+    no-timer: NO_TIMER
+    timer-setter: TIMER_SETTER
+    timer-set: TIMER_SET
+  bombs:
+    HYDROGEN_BOMB:
+      name: "&aHydrogen Bomb"
+      explosion-strength: 30
+      radiation-radius: 25
+      radiation-duration: 120 # in seconds
+      radiation-per-second: 3
+      drain: true
+      destroy-vehicle: false
+      structures:
+        - HYDROGEN_BOMB

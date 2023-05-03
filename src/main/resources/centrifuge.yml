@@ -1,5 +1,10 @@
 centrifuge:
-  structure: CENTRIFUGE
+  messages:
+    centrifuge-built: "The centrifuge has been constructed"
+    redstone-mode: "&eRedstone mode activated"
+    manual-mode: "&eManual mode activated"
+  structures:
+    - CENTRIFUGE
   menu-items:
     title: "&aCentrifuge"
     filter: FILTER
@@ -20,14 +25,22 @@ centrifuge:
     BLAZE_ROD: 50
     LAVA_BUCKET: 100
   recipes:
-    EXAMPLE_RECIPE:
-      input-1: U-235
-      input-2: U-238
+    URANIUM_RECIPE:
+      input-1: URANIUM_ORE
+      input-2: NULL
       output-1:
-        - U-235:20
-        - U-238:70
+        - U-235:1
+        - U-238:99
       output-2:
-        - U-235:70
-        - U-238:20
+        - NULL:0
       duration: 5 # in Seconds
-      fuel-power: 50
+      fuel-power: 25
+    EXAMPLE_RECIPE:
+      input-1: U-235x10
+      input-2: U-238x5
+      output-1:
+        - U-235x11:100
+      output-2:
+        - U-238x2:100
+      duration: 5
+      fuel-power: 25

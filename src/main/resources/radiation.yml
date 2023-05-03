@@ -1,4 +1,9 @@
 radiation:
+  messages:
+    player-radiation: "&cRadiation: %radiation%"
+    pill-used: "&eReduced your radiation"
+    radiation-death: "&aDied to radiation"
+    bomb-explode: "&eA bomb just exploded at %world% %x% %y% %z%. Look out for radiation near that area"
   radiation-removed-per-second: 0.3
   max-radiation: 500
   display:
@@ -39,7 +44,7 @@ radiation:
       recipes:
         EXAMPLE_RECIPE:
           type: SHAPED # SHAPED | SHAPELESS
-          recipe: AIR, SUGAR, AIR, SUGAR, MELON_SEEDS, SUGAR, AIR, SUGAR, AIR
+          recipe: AIR,SUGAR,AIR,SUGAR,MELON_SEEDS,SUGAR,AIR,SUGAR,AIR
   effects:
     WEAKNESS:
       radiation: 250

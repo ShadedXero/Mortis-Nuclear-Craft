@@ -1,16 +1,26 @@
 reactor:
-  structure: REACTOR
+  messages:
+    reactor-built: "The reactor has been constructed"
+    redstone-mode: "&eRedstone mode activated"
+    manual-mode: "&eManual mode activated"
+  structures:
+    - REACTOR
+    - REACTOR_2
+    - REACTOR_3
+    - REACTOR_4
   explosion:
     explosion-strength: 30
     radiation-radius: 25
     radiation-duration: 120 # in seconds
     radiation-per-second: 3
+    drain: true
     destroy-vehicle: false
   menu-items:
     title: "&aReactor"
     filter: FILTER
     input: INPUT
     output: OUTPUT
+    waste: WASTE
     fuel: FUEL
     fuel-calculator: FUEL_CALCULATOR
     water-calculator: WATER_CALCULATOR
@@ -28,6 +38,11 @@ reactor:
     EXAMPLE_RECIPE:
       input: U-238
       output: U-235
+      waste: U-238x2
+      specific-fuel: true
+      specific-fuel-used:
+        - BLAZE_ROD
+        - LAVA_BUCKET
       duration: 5 # in Seconds
       fuel-power: 50
-      water: 3
+      water: 1

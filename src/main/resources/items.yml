@@ -60,6 +60,10 @@ items:
     name: "&bManual Mode"
     lore:
       - "&7Currently in manual mode"
+  WASTE:
+    material: LIME_STAINED_GLASS_PANE
+    amount: 1
+    name: "&aWaste"
   FUEL:
     material: ORANGE_STAINED_GLASS_PANE
     amount: 1
@@ -147,15 +151,37 @@ items:
       - "&7Treats radiation sickness"
   U-235:
     material: NETHER_BRICK
-    custom-model-data: 1
     amount: 1
     name: "&bU-235"
     lore:
       - "&7Used as a fuel in the nuclear reactor"
   U-238:
     material: ROTTEN_FLESH
-    custom-model-data: 2
     amount: 1
+    name: "&bU-238"
+    lore:
+      - "&7Radioactive by-product of nuclear reactions"
+  U-235x10:
+    material: NETHER_BRICK
+    amount: 10
+    name: "&bU-235"
+    lore:
+      - "&7Used as a fuel in the nuclear reactor"
+  U-238x5:
+    material: ROTTEN_FLESH
+    amount: 5
+    name: "&bU-238"
+    lore:
+      - "&7Radioactive by-product of nuclear reactions"
+  U-235x11:
+    material: NETHER_BRICK
+    amount: 11
+    name: "&bU-235"
+    lore:
+      - "&7Used as a fuel in the nuclear reactor"
+  U-238x2:
+    material: ROTTEN_FLESH
+    amount: 2
     name: "&bU-238"
     lore:
       - "&7Radioactive by-product of nuclear reactions"
