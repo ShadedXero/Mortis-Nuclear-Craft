@@ -1,13 +1,7 @@
 package me.none030.mortisnuclearcraft;
 
-import me.none030.mortisnuclearcraft.managers.NuclearCraftManager;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Player;
+import me.none030.mortisnuclearcraft.nuclearcraft.NuclearCraftManager;
 import org.bukkit.plugin.java.JavaPlugin;
-import org.bukkit.scheduler.BukkitRunnable;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public final class MortisNuclearCraft extends JavaPlugin {
 
@@ -29,17 +23,6 @@ public final class MortisNuclearCraft extends JavaPlugin {
         brewery = getServer().getPluginManager().getPlugin("Brewery") != null;
         qav = getServer().getPluginManager().getPlugin("QualityArmoryVehicles") != null;
         nuclearCraftManager = new NuclearCraftManager();
-    }
-
-    public void onDisable() {
-        Connection connection = nuclearCraftManager.getDataManager().getConnection();
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 
     public static MortisNuclearCraft getInstance() {

@@ -29,6 +29,7 @@ public class Recipe {
         NamespacedKey key = new NamespacedKey(plugin, UUID.randomUUID().toString());
         if (type.equals(RecipeType.SHAPED)) {
             if (ingredients.size() < 9) {
+                plugin.getLogger().info("Recipe not registered");
                 return;
             }
             ShapedRecipe recipe = new ShapedRecipe(key, result);

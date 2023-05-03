@@ -1,11 +1,12 @@
 package me.none030.mortisnuclearcraft.config;
 
-import me.none030.mortisnuclearcraft.MortisNuclearCraft;
 import me.none030.mortisnuclearcraft.structures.Structure;
 import me.none030.mortisnuclearcraft.structures.StructureBlock;
 import me.none030.mortisnuclearcraft.structures.StructureManager;
 import me.none030.mortisnuclearcraft.structures.Vector;
+import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.block.data.BlockData;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -16,17 +17,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-public class StructuresConfig {
-
-    private final MortisNuclearCraft plugin = MortisNuclearCraft.getInstance();
-    private final ConfigManager configManager;
+public class StructuresConfig extends Config {
 
     public StructuresConfig(ConfigManager configManager) {
-        this.configManager = configManager;
-        loadConfig();
+        super("structures.yml", configManager);
     }
 
-    private void loadConfig() {
+    @Override
+    public void loadConfig() {
         File file = saveConfig();
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         loadSettings(config.getConfigurationSection("settings"));
@@ -35,84 +33,108 @@ public class StructuresConfig {
 
     private void loadSettings(ConfigurationSection settings) {
         if (settings == null) {
-            plugin.getLogger().severe("'settings' section could not be found in structures.yml");
-            plugin.getLogger().severe("Please add the 'settings' section back or regenerate the structures.yml file");
             return;
         }
-        if (!settings.contains("radiusX")) {
-            plugin.getLogger().severe("Detected a problem with 'radiusX' at 'settings' section in structures.yml");
-        }
-        if (!settings.contains("radiusY")) {
-            plugin.getLogger().severe("Detected a problem with 'radiusY' at 'settings' section in structures.yml");
-        }
-        if (!settings.contains("radiusZ")) {
-            plugin.getLogger().severe("Detected a problem with 'radiusZ' at 'settings' section in structures.yml");
+        if (!settings.contains("radiusX") || !settings.contains("radiusY") || !settings.contains("radiusZ")) {
+            return;
         }
         int radiusX = settings.getInt("radiusX");
         int radiusY = settings.getInt("radiusY");
         int radiusZ = settings.getInt("radiusZ");
         Vector vector = new Vector(radiusX, radiusY, radiusZ);
-        configManager.getManager().setStructureManager(new StructureManager(vector));
+        getConfigManager().getManager().setStructureManager(new StructureManager(vector));
     }
 
     private void loadStructures(ConfigurationSection structures) {
         if (structures == null) {
-            plugin.getLogger().severe("'structures' section could not be found in structures.yml");
-            plugin.getLogger().severe("Please add the 'structures' section back or regenerate the structures.yml file");
             return;
         }
         for (String key : structures.getKeys(false)) {
             ConfigurationSection section = structures.getConfigurationSection(key);
             if (section == null) {
-                plugin.getLogger().severe("Detected a problem with '" + key + "' at 'structures' section in structures.yml");
                 continue;
             }
-            Material core = Material.valueOf(section.getString("core-block"));
+            ConfigurationSection coreSection = section.getConfigurationSection("core-block");
+            if (coreSection == null) {
+                continue;
+            }
+            boolean coreStrict = coreSection.getBoolean("strict");
+            Material coreMaterial;
+            try {
+                coreMaterial = Material.valueOf(coreSection.getString("material"));
+            }catch (IllegalArgumentException exp) {
+                continue;
+            }
+            String rawCoreData = coreSection.getString("data");
+            if (rawCoreData == null) {
+                continue;
+            }
+            BlockData coreData = Bukkit.createBlockData(rawCoreData);
+            String coreRaw = coreSection.getString("vector");
+            if (coreRaw == null) {
+                continue;
+            }
+            String[] coreRawVector = coreRaw.split(",");
+            Vector coreVector = new Vector(Double.parseDouble(coreRawVector[0]), Double.parseDouble(coreRawVector[1]), Double.parseDouble(coreRawVector[2]));
+            StructureBlock core = new StructureBlock(coreMaterial, coreData, coreVector, coreStrict);
             List<StructureBlock> structureBlocks = new ArrayList<>();
-            for (String id : section.getKeys(false)) {
-                if (id.equals("core-block")) {
-                    continue;
-                }
+            List<String> keys = new ArrayList<>(section.getKeys(false));
+            keys.remove("core-block");
+            for (String id : keys) {
                 ConfigurationSection blocks = section.getConfigurationSection(id);
                 if (blocks == null) {
-                    plugin.getLogger().severe("Detected a problem with '" + id + "' at '" + key + "' section at 'structures' section in structures.yml");
                     continue;
                 }
-                Material material = Material.valueOf(blocks.getString("material"));
+                boolean strict = blocks.getBoolean("strict");
+                Material material;
+                try {
+                    material = Material.valueOf(blocks.getString("material"));
+                }catch (IllegalArgumentException exp) {
+                    continue;
+                }
+                String rawData = blocks.getString("data");
+                if (rawData == null) {
+                    continue;
+                }
+                BlockData data = Bukkit.createBlockData(rawData);
                 String raw = blocks.getString("vector");
                 if (raw == null) {
-                    plugin.getLogger().severe("Detected a problem with vector at '" + id + "' section at '" + key + "' section at 'structures' section in structures.yml");
                     continue;
                 }
                 String[] rawVector = raw.split(",");
                 Vector vector = new Vector(Double.parseDouble(rawVector[0]), Double.parseDouble(rawVector[1]), Double.parseDouble(rawVector[2]));
-                StructureBlock structureBlock = new StructureBlock(material, vector);
+                StructureBlock structureBlock = new StructureBlock(material, data, vector, strict);
                 structureBlocks.add(structureBlock);
             }
             Structure structure = new Structure(key, core, structureBlocks);
-            configManager.getManager().getStructureManager().getStructures().add(structure);
-            configManager.getManager().getStructureManager().getStructureById().put(key, structure);
+            getConfigManager().getManager().getStructureManager().getStructures().add(structure);
+            getConfigManager().getManager().getStructureManager().getStructureById().put(key, structure);
         }
     }
 
-    public void saveStructures(Structure structure) {
+    public void saveStructure(Structure structure) {
         File file = saveConfig();
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         ConfigurationSection structures = config.getConfigurationSection("structures");
         if (structures == null) {
-            plugin.getLogger().severe("'structures' section could not be found in structures.yml");
-            plugin.getLogger().severe("Please add the 'structures' section back or regenerate the structures.yml file");
             return;
         }
         String id = structure.getId();
         ConfigurationSection section = structures.createSection(id);
-        Material core = structure.getCore();
-        section.set("core-block", core.toString());
+        ConfigurationSection coreSection = section.createSection("core-block");
+        StructureBlock core = structure.getCore();
+        coreSection.set("strict", core.isStrict());
+        coreSection.set("material", core.getMaterial().toString());
+        coreSection.set("data", core.getData().getAsString());
+        coreSection.set("vector", core.getVector().getX() + ", " + core.getVector().getY() + ", " + core.getVector().getZ());
         for (StructureBlock structureBlock : structure.getBlocks()) {
-            Material type = structureBlock.getType();
+            Material type = structureBlock.getMaterial();
+            BlockData data = structureBlock.getData();
             Vector vector = structureBlock.getVector();
             ConfigurationSection blockSection = section.createSection(UUID.randomUUID().toString());
+            blockSection.set("strict", structureBlock.isStrict());
             blockSection.set("material", type.toString());
+            blockSection.set("data", data.getAsString());
             blockSection.set("vector", vector.getX() + ", " + vector.getY() + ", " + vector.getZ());
         }
         try {
@@ -127,8 +149,6 @@ public class StructuresConfig {
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         ConfigurationSection structures = config.getConfigurationSection("structures");
         if (structures == null) {
-            plugin.getLogger().severe("'structures' section could not be found in structures.yml");
-            plugin.getLogger().severe("Please add the 'structures' section back or regenerate the structures.yml file");
             return;
         }
         ConfigurationSection structure = structures.getConfigurationSection(id);
@@ -145,13 +165,5 @@ public class StructuresConfig {
         }catch (IOException exp) {
             exp.printStackTrace();
         }
-    }
-
-    private File saveConfig() {
-        File file = new File(plugin.getDataFolder(), "structures.yml");
-        if (!file.exists()) {
-            plugin.saveResource("structures.yml", false);
-        }
-        return file;
     }
 }

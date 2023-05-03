@@ -1,31 +1,26 @@
 package me.none030.mortisnuclearcraft.config;
 
 import me.none030.mortisnuclearcraft.MortisNuclearCraft;
-import me.none030.mortisnuclearcraft.armors.ArmorManager;
-import me.none030.mortisnuclearcraft.armors.RadiationArmor;
+import me.none030.mortisnuclearcraft.nuclearcraft.armors.ArmorManager;
+import me.none030.mortisnuclearcraft.nuclearcraft.armors.RadiationArmor;
 import me.none030.mortisnuclearcraft.utils.radiation.RadiationType;
-import me.none030.mortisnuclearcraft.utils.recipe.Recipe;
-import me.none030.mortisnuclearcraft.utils.recipe.RecipeType;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.List;
 
-public class ArmorsConfig {
+public class ArmorsConfig extends Config {
 
     private final MortisNuclearCraft plugin = MortisNuclearCraft.getInstance();
-    private final ConfigManager configManager;
 
     public ArmorsConfig(ConfigManager configManager) {
-        this.configManager = configManager;
-        loadConfig();
+        super("armors.yml", configManager);
     }
 
-    private void loadConfig() {
+    @Override
+    public void loadConfig() {
         File file = saveConfig();
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         ConfigurationSection section = config.getConfigurationSection("armors");
@@ -34,7 +29,7 @@ public class ArmorsConfig {
             plugin.getLogger().severe("Please add the 'armors' section back or regenerate the armors.yml file");
             return;
         }
-        configManager.getManager().setArmorManager(new ArmorManager(configManager.getManager().getRadiationManager()));
+        getConfigManager().getManager().setArmorManager(new ArmorManager(getConfigManager().getManager().getRadiationManager()));
         loadArmors(section);
     }
 
@@ -46,7 +41,7 @@ public class ArmorsConfig {
                 continue;
             }
             String itemId = armor.getString("item");
-            ItemStack item = configManager.getManager().getItemManager().getItemById().get(itemId);
+            ItemStack item = getConfigManager().getManager().getItemManager().getItem(itemId);
             if (item == null) {
                 plugin.getLogger().severe("Detected a problem with 'item' at '" + key + "' section in 'armors' section in addons.yml");
                 plugin.getLogger().severe("Please enter a valid item id");
@@ -62,18 +57,10 @@ public class ArmorsConfig {
             }
             double radiation = armor.getDouble("radiation");
             int weight = armor.getInt("weight");
-            RadiationArmor radiationArmor = new RadiationArmor(configManager.getManager().getRadiationManager(), key, item, type, radiation, weight);
-            configManager.getManager().getArmorManager().getArmors().add(radiationArmor);
-            configManager.getManager().getArmorManager().getArmorById().put(key, radiationArmor);
-            configManager.addRecipe(armor.getConfigurationSection("recipes"), radiationArmor.getArmor());
+            RadiationArmor radiationArmor = new RadiationArmor(key, item, type, radiation, weight);
+            getConfigManager().getManager().getArmorManager().getArmors().add(radiationArmor);
+            getConfigManager().getManager().getArmorManager().getArmorById().put(key, radiationArmor);
+            addRecipe(armor.getConfigurationSection("recipes"), radiationArmor.getArmor());
         }
-    }
-
-    private File saveConfig() {
-        File file = new File(plugin.getDataFolder(), "armors.yml");
-        if (!file.exists()) {
-            plugin.saveResource("armors.yml", false);
-        }
-        return file;
     }
 }

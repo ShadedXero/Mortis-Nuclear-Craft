@@ -1,13 +1,12 @@
 package me.none030.mortisnuclearcraft.utils.addons;
 
-import me.none030.mortisnuclearcraft.radiation.RadiationManager;
+import me.none030.mortisnuclearcraft.nuclearcraft.radiatiton.RadiationManager;
 import me.none030.mortisnuclearcraft.utils.radiation.RadiationMode;
 import me.none030.mortisnuclearcraft.utils.radiation.RadiationType;
 import org.bukkit.entity.Player;
 
 public class Weapon {
 
-    private final RadiationManager radiationManager;
     private final String id;
     private final String weapon;
     private final RadiationType type;
@@ -15,8 +14,7 @@ public class Weapon {
     private final double rad;
     private final int radius;
 
-    public Weapon(RadiationManager radiationManager, String id, String weapon, RadiationType type, RadiationMode mode, double rad, int radius) {
-        this.radiationManager = radiationManager;
+    public Weapon(String id, String weapon, RadiationType type, RadiationMode mode, double rad, int radius) {
         this.id = id;
         this.weapon = weapon;
         this.type = type;
@@ -29,7 +27,7 @@ public class Weapon {
         return weapon.equals(id);
     }
 
-    public void changeRadiation(Player player) {
+    public void changeRadiation(RadiationManager radiationManager, Player player) {
         if (type.equals(RadiationType.INCREASE)) {
             radiationManager.addRadiation(player, rad);
         } else {
@@ -39,10 +37,6 @@ public class Weapon {
 
     public String getId() {
         return id;
-    }
-
-    public RadiationManager getRadiation() {
-        return radiationManager;
     }
 
     public String getWeapon() {
@@ -57,7 +51,7 @@ public class Weapon {
         return mode;
     }
 
-    public double getRad() {
+    public double getRadiation() {
         return rad;
     }
 

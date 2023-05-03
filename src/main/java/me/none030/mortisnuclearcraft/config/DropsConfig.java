@@ -1,7 +1,6 @@
 package me.none030.mortisnuclearcraft.config;
 
-import me.none030.mortisnuclearcraft.MortisNuclearCraft;
-import me.none030.mortisnuclearcraft.drops.Drop;
+import me.none030.mortisnuclearcraft.nuclearcraft.drops.Drop;
 import org.bukkit.Material;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -12,17 +11,14 @@ import org.bukkit.inventory.ItemStack;
 import java.io.File;
 import java.util.HashMap;
 
-public class DropsConfig {
-
-    private final MortisNuclearCraft plugin = MortisNuclearCraft.getInstance();
-    private final ConfigManager configManager;
+public class DropsConfig extends Config {
 
     public DropsConfig(ConfigManager configManager) {
-        this.configManager = configManager;
-        loadConfig();
+        super("drops.yml", configManager);
     }
 
-    private void loadConfig() {
+    @Override
+    public void loadConfig() {
         File file = saveConfig();
         FileConfiguration config = YamlConfiguration.loadConfiguration(file);
         loadDrops(config.getConfigurationSection("drops"));
@@ -30,21 +26,21 @@ public class DropsConfig {
 
     private void loadDrops(ConfigurationSection drops) {
         if (drops == null) {
-            plugin.getLogger().severe("'drops' section could not be found in drops.yml");
-            plugin.getLogger().severe("Please add the 'drops' section back or regenerate the drops.yml file");
+            getPlugin().getLogger().severe("'drops' section could not be found in drops.yml");
+            getPlugin().getLogger().severe("Please add the 'drops' section back or regenerate the drops.yml file");
             return;
         }
         for (String key : drops.getKeys(false)) {
             ConfigurationSection section = drops.getConfigurationSection(key);
             if (section == null) {
-                plugin.getLogger().severe("Detected a problem with '" + key + "' in drops.yml");
+                getPlugin().getLogger().severe("Detected a problem with '" + key + "' in drops.yml");
                 continue;
             }
             String itemId = section.getString("item");
-            ItemStack item = configManager.getManager().getItemManager().getItemById().get(itemId);
+            ItemStack item = getConfigManager().getManager().getItemManager().getItem(itemId);
             if (item == null) {
-                plugin.getLogger().severe("No item could be found with the id '" + itemId + "' at '" + key + "' in drops.yml");
-                plugin.getLogger().severe("Please use a valid item id from items.yml");
+                getPlugin().getLogger().severe("No item could be found with the id '" + itemId + "' at '" + key + "' in drops.yml");
+                getPlugin().getLogger().severe("Please use a valid item id from items.yml");
                 continue;
             }
             HashMap<Material, Double> blocksList = null;
@@ -56,7 +52,7 @@ public class DropsConfig {
                     try {
                         material = Material.valueOf(type);
                     }catch (IllegalArgumentException exp) {
-                        plugin.getLogger().severe("Detected a problem with material '" + type + "' at '" + key + "' in drops.yml");
+                        getPlugin().getLogger().severe("Detected a problem with material '" + type + "' at '" + key + "' in drops.yml");
                         continue;
                     }
                     double chance = blocks.getDouble(type);
@@ -72,7 +68,7 @@ public class DropsConfig {
                     try {
                         entity = EntityType.valueOf(type);
                     }catch (IllegalArgumentException exp) {
-                        plugin.getLogger().severe("Detected a problem with entity '" + type + "' at '" + key + "' in drops.yml");
+                        getPlugin().getLogger().severe("Detected a problem with entity '" + type + "' at '" + key + "' in drops.yml");
                         continue;
                     }
                     double chance = mobs.getDouble(type);
@@ -80,16 +76,8 @@ public class DropsConfig {
                 }
             }
             Drop drop = new Drop(key, item, blocksList, mobsList);
-            configManager.getManager().getDropManager().getDrops().add(drop);
-            configManager.getManager().getDropManager().getDropById().put(key, drop);
+            getConfigManager().getManager().getDropManager().getDrops().add(drop);
+            getConfigManager().getManager().getDropManager().getDropById().put(key, drop);
         }
-    }
-
-    private File saveConfig() {
-        File file = new File(plugin.getDataFolder(), "drops.yml");
-        if (!file.exists()) {
-            plugin.saveResource("drops.yml", false);
-        }
-        return file;
     }
 }

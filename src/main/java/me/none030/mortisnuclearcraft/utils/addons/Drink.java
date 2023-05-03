@@ -1,20 +1,18 @@
 package me.none030.mortisnuclearcraft.utils.addons;
 
-import me.none030.mortisnuclearcraft.radiation.RadiationManager;
+import me.none030.mortisnuclearcraft.nuclearcraft.radiatiton.RadiationManager;
 import me.none030.mortisnuclearcraft.utils.radiation.RadiationType;
 import org.bukkit.entity.Player;
 
 public class Drink {
 
-    private final RadiationManager radiationManager;
     private final String id;
     private final Equation equation;
     private final int alcohol;
     private final RadiationType type;
     private final double rad;
 
-    public Drink(RadiationManager radiationManager, String id, Equation equation, int alcohol, RadiationType type, double rad) {
-        this.radiationManager = radiationManager;
+    public Drink(String id, Equation equation, int alcohol, RadiationType type, double rad) {
         this.id = id;
         this.equation = equation;
         this.alcohol = alcohol;
@@ -41,16 +39,12 @@ public class Drink {
         return false;
     }
 
-    public void changeRadiation(Player player) {
+    public void changeRadiation(RadiationManager radiationManager, Player player) {
         if (type.equals(RadiationType.INCREASE)) {
             radiationManager.addRadiation(player, rad);
         } else {
             radiationManager.removeRadiation(player, rad);
         }
-    }
-
-    public RadiationManager getRadiation() {
-        return radiationManager;
     }
 
     public String getId() {
@@ -69,7 +63,7 @@ public class Drink {
         return type;
     }
 
-    public double getRad() {
+    public double getRadiation() {
         return rad;
     }
 }

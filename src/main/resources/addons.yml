@@ -17,7 +17,7 @@ crack-shot:
       radius: 3
   grenades:
     EXAMPLE_GRENADE:
-      grenade: GRENADE
+      grenade: Grenade
       type: INCREASE # INCREASE | DECREASE
       radiation: 5
       radius: 7
@@ -33,7 +33,7 @@ weapon-mechanics:
       radius: 3
   grenades:
     EXAMPLE_GRENADE:
-      grenade: GRENADE
+      grenade: Grenade
       type: INCREASE # INCREASE | DECREASE
       radiation: 5
       radius: 7
