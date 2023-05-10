@@ -3,6 +3,7 @@ centrifuge:
     centrifuge-built: "The centrifuge has been constructed"
     redstone-mode: "&eRedstone mode activated"
     manual-mode: "&eManual mode activated"
+    switch: "&6[Towny] &cOutsiders aren't allowed to Switch"
   structures:
     - CENTRIFUGE
   menu-items:

@@ -2,7 +2,7 @@ radiation:
   messages:
     player-radiation: "&cRadiation: %radiation%"
     pill-used: "&eReduced your radiation"
-    radiation-death: "&aDied to radiation"
+    radiation-death: "&a%player_name% died to radiation"
     bomb-explode: "&eA bomb just exploded at %world% %x% %y% %z%. Look out for radiation near that area"
   radiation-removed-per-second: 0.3
   max-radiation: 500
@@ -11,6 +11,9 @@ radiation:
     mode: CONSTANT # CONSTANT | SINGLE
     toggle-mode: COMMAND # COMMAND | ITEM
     toggle-item: TOGGLE_ITEM
+  worlds: # World name: radiation per second
+    world_nether: 1
+    world_the_end: 5
   mobs:
     EXAMPLE_ZOMBIE:
       mob: ZOMBIE

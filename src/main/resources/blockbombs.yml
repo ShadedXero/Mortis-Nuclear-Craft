@@ -8,6 +8,7 @@ block-bombs:
     redstone-mode: "&eRedstone mode activated"
     manual-mode: "&eManual mode activated"
     bomb-built: "&eThe bomb has been constructed"
+    switch: "&6[Towny] &cOutsiders aren't allowed to Switch"
   menu-items:
     filter: FILTER
     redstone-mode: REDSTONE_MODE
@@ -24,6 +25,12 @@ block-bombs:
       radiation-duration: 120 # in seconds
       radiation-per-second: 3
       drain: true
+      fire: true
       destroy-vehicle: false
+      block-damage: true
+      towny-block-damage: true
+      block-regen: true
+      towny-regen: true
+      regen-time: 20 # in seconds
       structures:
         - HYDROGEN_BOMB

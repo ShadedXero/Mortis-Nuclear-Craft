@@ -3,6 +3,7 @@ reactor:
     reactor-built: "The reactor has been constructed"
     redstone-mode: "&eRedstone mode activated"
     manual-mode: "&eManual mode activated"
+    switch: "&6[Towny] &cOutsiders aren't allowed to Switch"
   structures:
     - REACTOR
     - REACTOR_2
@@ -14,7 +15,13 @@ reactor:
     radiation-duration: 120 # in seconds
     radiation-per-second: 3
     drain: true
+    fire: true
     destroy-vehicle: false
+    block-damage: true
+    towny-block-damage: true
+    block-regen: true
+    towny-regen: true
+    regen-time: 20 # in seconds
   menu-items:
     title: "&aReactor"
     filter: FILTER
