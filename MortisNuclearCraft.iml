@@ -62,6 +62,7 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.asm:asm:9.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.asm:asm-commons:9.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.asm:asm-tree:9.4" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.palmergames.bukkit.towny:towny:0.99.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: io.lumine:Mythic-Dist:5.2.0" level="project" />
     <orderEntry type="module-library">
       <library name="Maven: com.shampaggon:crackshot:0.98.11">
@@ -93,5 +94,14 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="Maven: com.jeff_media:CustomBlockData:2.2.0" level="project" />
+    <orderEntry type="module-library">
+      <library name="Maven: com.jeff_media:FilteredHoppers:1.8.1">
+        <CLASSES>
+          <root url="jar://$USER_HOME$/Downloads/FilteredHoppers-1.8.1.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>
