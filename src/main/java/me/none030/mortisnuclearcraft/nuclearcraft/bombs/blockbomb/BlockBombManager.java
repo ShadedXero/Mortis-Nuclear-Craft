@@ -7,7 +7,6 @@ import me.none030.mortisnuclearcraft.nuclearcraft.radiatiton.RadiationManager;
 import me.none030.mortisnuclearcraft.structures.Structure;
 import me.none030.mortisnuclearcraft.utils.NuclearType;
 import org.bukkit.Location;
-import org.bukkit.block.Block;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.time.LocalDateTime;
@@ -63,7 +62,7 @@ public class BlockBombManager extends Manager {
                     if (!data.isManualMode()) {
                         if (structure.hasRedstoneSignal(core)) {
                             structure.destroy(core);
-                            bomb.explode(blockBombManager, core);
+                            bomb.explode(blockBombManager.getRadiationManager(), core);
                             delete(data);
                             continue;
                         }
@@ -73,7 +72,7 @@ public class BlockBombManager extends Manager {
                     }
                     if (data.getTimer().isBefore(LocalDateTime.now())) {
                         structure.destroy(core);
-                        bomb.explode(blockBombManager, core);
+                        bomb.explode(blockBombManager.getRadiationManager(), core);
                         delete(data);
                     }
                 }

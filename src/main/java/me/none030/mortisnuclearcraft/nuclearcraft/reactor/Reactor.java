@@ -21,28 +21,13 @@ public class Reactor extends Bomb {
     private final List<ReactorRecipe> recipes;
     private final HashMap<String, ReactorRecipe> recipeById;
     private final List<Fuel> fuels;
-    private final int strength;
-    private final long duration;
-    private final double radiation;
-    private final boolean vehicles;
-    private final boolean drain;
 
-    public Reactor(int radius, List<Structure> structures, int strength, long duration, double radiation, boolean vehicles, boolean drain) {
-        super(radius);
+    public Reactor(int radius, List<Structure> structures, int strength, long duration, double radiation, boolean vehicles, boolean drain, boolean fire, boolean blockDamage, boolean townyBlockDamage, boolean blockRegen, boolean townyBlockRegen, long regenTime) {
+        super(strength, radius, duration, radiation, vehicles, drain, fire, blockDamage, townyBlockDamage, blockRegen, townyBlockRegen, regenTime);
         this.structures = structures;
         this.recipes = new ArrayList<>();
         this.recipeById = new HashMap<>();
         this.fuels = new ArrayList<>();
-        this.strength = strength;
-        this.duration = duration;
-        this.radiation = radiation;
-        this.vehicles = vehicles;
-        this.drain = drain;
-    }
-
-    public void explode(ReactorManager reactorManager, Location loc) {
-        explode(loc, strength, vehicles, drain);
-        radiate(reactorManager.getRadiationManager(), loc, duration, radiation);
     }
 
     public int getFuelPower(ItemStack item) {
@@ -236,8 +221,8 @@ public class Reactor extends Bomb {
                     data.setInput(input);
                 }
             }else {
+                data.setInput(item.clone());
                 inv.removeItem(item);
-                data.setInput(item);
             }
         }
     }
@@ -265,23 +250,4 @@ public class Reactor extends Bomb {
         return fuels;
     }
 
-    public int getStrength() {
-        return strength;
-    }
-
-    public long getDuration() {
-        return duration;
-    }
-
-    public double getRadiation() {
-        return radiation;
-    }
-
-    public boolean isVehicles() {
-        return vehicles;
-    }
-
-    public boolean isDrain() {
-        return drain;
-    }
 }

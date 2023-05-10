@@ -3,17 +3,10 @@ package me.none030.mortisnuclearcraft.nuclearcraft.radiatiton;
 import me.none030.mortisnuclearcraft.MortisNuclearCraft;
 import me.none030.mortisnuclearcraft.nuclearcraft.Manager;
 import me.none030.mortisnuclearcraft.utils.NuclearType;
-import me.none030.mortisnuclearcraft.utils.radiation.RadiationMode;
-import org.bukkit.Bukkit;
 import org.bukkit.boss.BossBar;
-import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
-import org.bukkit.scheduler.BukkitRunnable;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public class RadiationManager extends Manager {
 
@@ -21,6 +14,7 @@ public class RadiationManager extends Manager {
     private final HashMap<UUID, Double> radiationByPlayer;
     private final HashMap<UUID, BossBar> bossBarByPlayer;
     private final HashMap<UUID, Boolean> toggleByPlayer;
+    private final HashMap<UUID, Set<RadiationEffect>> affectedPlayers;
 
     public RadiationManager(Radiation radiation) {
         super(NuclearType.RADIATION);
@@ -28,9 +22,16 @@ public class RadiationManager extends Manager {
         this.radiationByPlayer = new HashMap<>();
         this.bossBarByPlayer = new HashMap<>();
         this.toggleByPlayer = new HashMap<>();
+        this.affectedPlayers = new HashMap<>();
         MortisNuclearCraft plugin = MortisNuclearCraft.getInstance();
         plugin.getServer().getPluginManager().registerEvents(new RadiationListener(this), plugin);
         radiation.check(this);
+    }
+
+    public void preReload() {
+        for (BossBar bossBar : bossBarByPlayer.values()) {
+            bossBar.removeAll();
+        }
     }
 
     public void addRadiation(Player player, double radiation) {
@@ -44,6 +45,21 @@ public class RadiationManager extends Manager {
         }
         double amount = playerRadiation + radiation;
         radiationByPlayer.put(player.getUniqueId(), Math.min(amount, this.radiation.getMaxRadiation()));
+        for (RadiationEffect effect : getRadiation().getEffects()) {
+            if (!effect.hasAbove(this, player)) {
+                continue;
+            }
+            Set<RadiationEffect> effects = affectedPlayers.get(player.getUniqueId());
+            if (effects == null) {
+                effects = new HashSet<>();
+            }
+            if (effects.contains(effect)) {
+                continue;
+            }
+            effect.applyEffect(player);
+            effects.add(effect);
+            affectedPlayers.put(player.getUniqueId(), effects);
+        }
     }
 
     public void removeRadiation(Player player, double radiation) {
@@ -60,11 +76,51 @@ public class RadiationManager extends Manager {
         }
         double amount = playerRadiation - radiation;
         radiationByPlayer.put(player.getUniqueId(), Math.max(amount, 0.0));
+        for (RadiationEffect effect : getRadiation().getEffects()) {
+            if (effect.hasAbove(this, player)) {
+                continue;
+            }
+            Set<RadiationEffect> effects = affectedPlayers.get(player.getUniqueId());
+            if (effects == null) {
+                effects = new HashSet<>();
+            }
+            if (!effects.contains(effect)) {
+                continue;
+            }
+            effect.removeEffect(player);
+            effects.remove(effect);
+            affectedPlayers.put(player.getUniqueId(), effects);
+        }
     }
 
     public void setRadiation(Player player, double radiation) {
         double maxRadiation = this.radiation.getMaxRadiation();
         radiationByPlayer.put(player.getUniqueId(), Math.min(radiation, maxRadiation));
+        for (RadiationEffect effect : getRadiation().getEffects()) {
+            if (effect.hasAbove(this, player)) {
+                Set<RadiationEffect> effects = affectedPlayers.get(player.getUniqueId());
+                if (effects == null) {
+                    effects = new HashSet<>();
+                }
+                if (effects.contains(effect)) {
+                    continue;
+                }
+                effect.applyEffect(player);
+                effects.add(effect);
+                affectedPlayers.put(player.getUniqueId(), effects);
+            }else {
+                Set<RadiationEffect> effects = affectedPlayers.get(player.getUniqueId());
+                if (effects == null) {
+                    effects = new HashSet<>();
+                }
+                if (!effects.contains(effect)) {
+                    continue;
+                }
+                effect.removeEffect(player);
+                effects.remove(effect);
+                affectedPlayers.put(player.getUniqueId(), effects);
+            }
+        }
     }
 
     public double getRadiation(Player player) {
@@ -91,5 +147,9 @@ public class RadiationManager extends Manager {
 
     public HashMap<UUID, Boolean> getToggleByPlayer() {
         return toggleByPlayer;
+    }
+
+    public HashMap<UUID, Set<RadiationEffect>> getAffectedPlayers() {
+        return affectedPlayers;
     }
 }

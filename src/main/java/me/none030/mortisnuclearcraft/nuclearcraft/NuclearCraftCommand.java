@@ -46,7 +46,7 @@ public class NuclearCraftCommand implements TabExecutor {
         }
         if (args[0].equalsIgnoreCase("structure")) {
             if (args[1].equalsIgnoreCase("save")) {
-                if (!sender.hasPermission("mortismachines.structure.save")) {
+                if (!sender.hasPermission("nuclearcraft.structure.save")) {
                     MessageUtils utils = new MessageUtils("&cYou do not have the permission to use this");
                     utils.color();
                     sender.sendMessage(utils.getMessage());
@@ -83,7 +83,7 @@ public class NuclearCraftCommand implements TabExecutor {
                 sender.sendMessage(utils.getMessage());
             }
             if (args[1].equalsIgnoreCase("delete")) {
-                if (!sender.hasPermission("mortismachines.structure.delete")) {
+                if (!sender.hasPermission("nuclearcraft.structure.delete")) {
                     MessageUtils utils = new MessageUtils("&cYou do not have the permission to use this");
                     utils.color();
                     sender.sendMessage(utils.getMessage());

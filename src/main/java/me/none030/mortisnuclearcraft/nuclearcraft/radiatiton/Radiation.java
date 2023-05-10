@@ -17,6 +17,7 @@ public class Radiation {
     private final double radiation;
     private final double maxRadiation;
     private final RadiationDisplay display;
+    private final List<RadiationWorld> worlds;
     private final List<RadiationMob> mobs;
     private final List<RadiationPill> pills;
     private final List<RadiationEffect> effects;
@@ -25,6 +26,7 @@ public class Radiation {
         this.radiation = radiation;
         this.maxRadiation = maxRadiation;
         this.display = display;
+        this.worlds = new ArrayList<>();
         this.mobs = new ArrayList<>();
         this.pills = new ArrayList<>();
         this.effects = new ArrayList<>();
@@ -58,13 +60,6 @@ public class Radiation {
             @Override
             public void run() {
                 for (Player player : Bukkit.getOnlinePlayers()) {
-                    for (RadiationEffect effect : effects) {
-                        if (effect.hasAbove(radiationManager, player)) {
-                            effect.applyEffect(player);
-                        }else {
-                            effect.removeEffect(player);
-                        }
-                    }
                     List<LivingEntity> entities = new ArrayList<>(player.getLocation().getNearbyLivingEntities(3));
                     for (RadiationMob mob : mobs) {
                         if (!mob.getMode().equals(RadiationMode.PROXIMITY)) {
@@ -74,6 +69,11 @@ public class Radiation {
                             if (mob.isMob(entity)) {
                                 mob.changeRadiation(radiationManager, player);
                             }
+                        }
+                    }
+                    for (RadiationWorld world : worlds) {
+                        if (world.isInWorld(player)) {
+                            world.addRadiation(radiationManager, player);
                         }
                     }
                     radiationManager.removeRadiation(player, radiation);
@@ -92,6 +92,10 @@ public class Radiation {
 
     public RadiationDisplay getDisplay() {
         return display;
+    }
+
+    public List<RadiationWorld> getWorlds() {
+        return worlds;
     }
 
     public List<RadiationMob> getMobs() {

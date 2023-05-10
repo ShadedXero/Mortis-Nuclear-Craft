@@ -1,23 +1,29 @@
 package me.none030.mortisnuclearcraft.nuclearcraft.bombs.blockbomb;
 
+import com.palmergames.bukkit.towny.object.TownyPermission;
+import com.palmergames.bukkit.towny.utils.PlayerCacheUtil;
 import io.papermc.paper.event.player.AsyncChatEvent;
+import me.none030.mortisnuclearcraft.MortisNuclearCraft;
 import me.none030.mortisnuclearcraft.structures.Structure;
 import me.none030.mortisnuclearcraft.utils.MessageUtils;
 import me.none030.mortisnuclearcraft.utils.bomb.MessageTime;
 import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.Inventory;
 
 import java.time.LocalDateTime;
 
 public class BlockBombListener implements Listener {
 
+    private final MortisNuclearCraft plugin = MortisNuclearCraft.getInstance();
     private final BlockBombManager blockBombManager;
 
     public BlockBombListener(BlockBombManager blockBombManager) {
@@ -41,10 +47,13 @@ public class BlockBombListener implements Listener {
 
     @EventHandler
     public void onBlockBombInteract(PlayerInteractEvent e) {
-        if (!e.getAction().isRightClick()) {
+        if (e.getHand() == null || !e.getHand().equals(EquipmentSlot.HAND)) {
             return;
         }
         Player player = e.getPlayer();
+        if (!e.getAction().isRightClick() || player.isSneaking()) {
+            return;
+        }
         Block block = e.getClickedBlock();
         if (block == null) {
             return;
@@ -52,6 +61,19 @@ public class BlockBombListener implements Listener {
         BlockBombData data = blockBombManager.getBombData(block.getLocation());
         if (data == null) {
             return;
+        }
+        if (!player.hasPermission("nuclearcraft.access")) {
+            if (e.useInteractedBlock().equals(Event.Result.DENY) ) {
+                return;
+            }
+            if (plugin.hasTowny()) {
+                if (!PlayerCacheUtil.getCachePermission(player, block.getLocation(), block.getType(), TownyPermission.ActionType.SWITCH)) {
+                    player.sendMessage(blockBombManager.getMessage("SWITCH"));
+                    return;
+                }
+            }
+        }else {
+            e.setCancelled(false);
         }
         BlockBombMenu menu = new BlockBombMenu(blockBombManager, data);
         menu.open(player);

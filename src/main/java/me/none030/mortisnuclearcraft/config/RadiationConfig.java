@@ -2,6 +2,8 @@ package me.none030.mortisnuclearcraft.config;
 
 import me.none030.mortisnuclearcraft.nuclearcraft.radiatiton.*;
 import me.none030.mortisnuclearcraft.utils.radiation.*;
+import org.bukkit.Bukkit;
+import org.bukkit.World;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -36,6 +38,7 @@ public class RadiationConfig extends Config {
         }
         Radiation radiation = new Radiation(rad, maxRadiation, display);
         getConfigManager().getManager().setRadiationManager(new RadiationManager(radiation));
+        loadWorlds(section.getConfigurationSection("worlds"));
         loadMobs(section.getConfigurationSection("mobs"));
         loadPills(section.getConfigurationSection("pills"));
         loadEffects(section.getConfigurationSection("effects"));
@@ -84,6 +87,25 @@ public class RadiationConfig extends Config {
             toggleItem = item;
         }
         return new RadiationDisplay(type, mode, toggleMode, toggleItem);
+    }
+
+    private void loadWorlds(ConfigurationSection worlds) {
+        if (worlds == null) {
+            getPlugin().getLogger().severe("'worlds' section could not be found at 'radiation' section in radiation.yml");
+            getPlugin().getLogger().severe("Please add the 'worlds' section back at 'radiation' section or regenerate the radiation.yml file");
+            return;
+        }
+        for (String worldKey : worlds.getKeys(false)) {
+            World world = Bukkit.getWorld(worldKey);
+            if (world == null) {
+                getPlugin().getLogger().severe("Detected a problem with world name at 'worlds' section in 'radiation' section in radiation.yml");
+                getPlugin().getLogger().severe("Please enter a valid world name");
+                continue;
+            }
+            double radiation = worlds.getDouble(worldKey);
+            RadiationWorld radiationWorld = new RadiationWorld(world, radiation);
+            getConfigManager().getManager().getRadiationManager().getRadiation().getWorlds().add(radiationWorld);
+        }
     }
 
     private void loadMobs(ConfigurationSection mobs) {
@@ -176,7 +198,7 @@ public class RadiationConfig extends Config {
             boolean ambient = effect.getBoolean("ambient");
             boolean particle = effect.getBoolean("particle");
             boolean icon = effect.getBoolean("icon");
-            PotionEffect potionEffect = new PotionEffect(effectType, -1, amplifier, ambient, particle, icon);
+            PotionEffect potionEffect = new PotionEffect(effectType, 999999999, amplifier, ambient, particle, icon);
             RadiationEffect radiationEffect = new RadiationEffect(potionEffect, effectRad);
             getConfigManager().getManager().getRadiationManager().getRadiation().getEffects().add(radiationEffect);
         }

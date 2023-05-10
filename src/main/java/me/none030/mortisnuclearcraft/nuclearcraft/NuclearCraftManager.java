@@ -14,6 +14,7 @@ import me.none030.mortisnuclearcraft.nuclearcraft.reactor.ReactorManager;
 import me.none030.mortisnuclearcraft.nuclearcraft.waste.WasteManager;
 import me.none030.mortisnuclearcraft.structures.StructureManager;
 import org.bukkit.Bukkit;
+import org.bukkit.boss.BossBar;
 import org.bukkit.event.HandlerList;
 
 public class NuclearCraftManager {
@@ -40,6 +41,7 @@ public class NuclearCraftManager {
     }
 
     public void reload() {
+        radiationManager.preReload();
         HandlerList.unregisterAll(plugin);
         Bukkit.getScheduler().cancelTasks(plugin);
         setItemManager(new ItemManager());

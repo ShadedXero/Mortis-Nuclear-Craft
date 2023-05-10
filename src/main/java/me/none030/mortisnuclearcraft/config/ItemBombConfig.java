@@ -49,7 +49,13 @@ public class ItemBombConfig extends Config {
             double radiation = itemBomb.getInt("radiation-per-second");
             boolean vehicles = itemBomb.getBoolean("destroy-vehicle");
             boolean drain = itemBomb.getBoolean("drain");
-            ItemBomb bomb = new ItemBomb(key, item, speed, strength, radius, duration, radiation, vehicles, drain);
+            boolean fire = itemBomb.getBoolean("fire");
+            boolean blockDamage = itemBomb.getBoolean("block-damage");
+            boolean townyBlockDamage = itemBomb.getBoolean("towny-block-damage");
+            boolean blockRegen = itemBomb.getBoolean("block-regen");
+            boolean townyRegen = itemBomb.getBoolean("towny-regen");
+            long regenTime = itemBomb.getLong("regen-time");
+            ItemBomb bomb = new ItemBomb(key, item, speed, strength, radius, duration, radiation, vehicles, drain, fire, blockDamage, townyBlockDamage, blockRegen, townyRegen, regenTime);
             getConfigManager().getManager().getItemBombManager().getItemBombById().put(key, bomb);
         }
     }

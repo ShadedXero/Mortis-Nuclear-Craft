@@ -1,5 +1,6 @@
 package me.none030.mortisnuclearcraft.nuclearcraft.radiatiton;
 
+import me.none030.mortisnuclearcraft.utils.MessageUtils;
 import me.none030.mortisnuclearcraft.utils.radiation.DisplayMode;
 import me.none030.mortisnuclearcraft.utils.radiation.DisplayToggleMode;
 import me.none030.mortisnuclearcraft.utils.radiation.RadiationMode;
@@ -32,7 +33,9 @@ public class RadiationListener implements Listener {
     public void onDeath(PlayerDeathEvent e) {
         Player player = e.getPlayer();
         if (radiationManager.getRadiation(player) >= radiationManager.getRadiation().getMinRadiationEffect()) {
-            e.deathMessage(Component.text(radiationManager.getMessage("RADIATION_DEATH")));
+            MessageUtils utils = new MessageUtils(radiationManager.getMessage("RADIATION_DEATH"));
+            utils.replace("%player_name%", player.getName());
+            e.deathMessage(Component.text(utils.getMessage()));
         }
         radiationManager.setRadiation(player, 0);
     }

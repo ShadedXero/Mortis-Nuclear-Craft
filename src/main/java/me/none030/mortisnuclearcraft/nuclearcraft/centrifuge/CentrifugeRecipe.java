@@ -87,11 +87,19 @@ public class CentrifugeRecipe {
     }
 
     public ItemStack getOutput1() {
-        return output1.getRandom();
+        ItemStack item = output1.getRandom();
+        if (item == null) {
+            return null;
+        }
+        return item.clone();
     }
 
     public ItemStack getOutput2() {
-        return output2.getRandom();
+        ItemStack item = output2.getRandom();
+        if (item == null) {
+            return null;
+        }
+        return item.clone();
     }
 
 

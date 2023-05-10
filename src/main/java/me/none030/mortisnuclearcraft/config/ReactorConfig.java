@@ -78,7 +78,13 @@ public class ReactorConfig extends Config {
         double radiation = explosion.getDouble("radiation-per-second");
         boolean vehicles = explosion.getBoolean("destroy-vehicles");
         boolean drain = explosion.getBoolean("drain");
-        return new Reactor(radius, structures, strength, duration, radiation, vehicles, drain);
+        boolean fire = explosion.getBoolean("fire");
+        boolean blockDamage = explosion.getBoolean("block-damage");
+        boolean townyBlockDamage = explosion.getBoolean("towny-block-damage");
+        boolean blockRegen = explosion.getBoolean("block-regen");
+        boolean townyRegen = explosion.getBoolean("towny-regen");
+        long regenTime = explosion.getLong("regen-time");
+        return new Reactor(radius, structures, strength, duration, radiation, vehicles, drain, fire, blockDamage, townyBlockDamage, blockRegen, townyRegen, regenTime);
     }
 
     private void loadFuels(ConfigurationSection fuels) {

@@ -10,28 +10,13 @@ public class BlockBomb extends Bomb {
 
     private final String id;
     private final String name;
-    private final int strength;
-    private final int duration;
-    private final double radiation;
-    private final boolean vehicles;
-    private final boolean drain;
     private final List<Structure> structures;
 
-    public BlockBomb(String id, String name, int strength, int radius, int duration, double radiation, boolean vehicles, boolean drain, List<Structure> structures) {
-        super(radius);
+    public BlockBomb(String id, String name, int strength, int radius, long duration, double radiation, boolean vehicles, boolean drain, boolean fire, boolean blockDamage, boolean townyBlockDamage, boolean blockRegen, boolean townyBlockRegen, long regenTime, List<Structure> structures) {
+        super(strength, radius, duration, radiation, vehicles, drain, fire, blockDamage, townyBlockDamage, blockRegen, townyBlockRegen, regenTime);
         this.id = id;
         this.name = name;
-        this.strength = strength;
-        this.duration = duration;
-        this.radiation = radiation;
-        this.vehicles = vehicles;
-        this.drain = drain;
         this.structures = structures;
-    }
-
-    public void explode(BlockBombManager bombManager, Location loc) {
-        explode(loc, strength, vehicles, drain);
-        radiate(bombManager.getRadiationManager(), loc, duration, radiation);
     }
 
     public Structure getStructure(String structureId) {
@@ -58,26 +43,6 @@ public class BlockBomb extends Bomb {
 
     public String getName() {
         return name;
-    }
-
-    public int getStrength() {
-        return strength;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public double getRadiation() {
-        return radiation;
-    }
-
-    public boolean isVehicles() {
-        return vehicles;
-    }
-
-    public boolean isDrain() {
-        return drain;
     }
 
     public List<Structure> getStructures() {

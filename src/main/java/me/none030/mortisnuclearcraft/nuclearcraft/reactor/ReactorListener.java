@@ -1,19 +1,25 @@
 package me.none030.mortisnuclearcraft.nuclearcraft.reactor;
 
+import com.palmergames.bukkit.towny.object.TownyPermission;
+import com.palmergames.bukkit.towny.utils.PlayerCacheUtil;
+import me.none030.mortisnuclearcraft.MortisNuclearCraft;
 import me.none030.mortisnuclearcraft.structures.Structure;
 import me.none030.mortisnuclearcraft.utils.MessageUtils;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.Event;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockPlaceEvent;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
+import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.ItemStack;
 
 public class ReactorListener implements Listener {
 
+    private final MortisNuclearCraft plugin = MortisNuclearCraft.getInstance();
     private final ReactorManager reactorManager;
 
     public ReactorListener(ReactorManager reactorManager) {
@@ -36,10 +42,13 @@ public class ReactorListener implements Listener {
 
     @EventHandler
     public void onInteract(PlayerInteractEvent e) {
-        if (!e.getAction().isRightClick()) {
+        if (e.getHand() == null || !e.getHand().equals(EquipmentSlot.HAND)) {
             return;
         }
         Player player = e.getPlayer();
+        if (!e.getAction().isRightClick() || player.isSneaking()) {
+            return;
+        }
         Block block = e.getClickedBlock();
         if (block == null) {
             return;
@@ -48,6 +57,19 @@ public class ReactorListener implements Listener {
         ReactorData data = reactorManager.getReactorData(core);
         if (data == null) {
             return;
+        }
+        if (!player.hasPermission("nuclearcraft.access")) {
+            if (e.useInteractedBlock().equals(Event.Result.DENY) ) {
+                return;
+            }
+            if (plugin.hasTowny()) {
+                if (!PlayerCacheUtil.getCachePermission(player, block.getLocation(), block.getType(), TownyPermission.ActionType.SWITCH)) {
+                    player.sendMessage(reactorManager.getMessage("SWITCH"));
+                    return;
+                }
+            }
+        }else {
+            e.setCancelled(false);
         }
         ReactorMenu menu = new ReactorMenu(reactorManager, data);
         menu.open(player);
@@ -72,7 +94,7 @@ public class ReactorListener implements Listener {
         int slot = e.getRawSlot();
         ItemStack cursor = e.getCursor();
         ItemStack item = menu.click(player, slot, cursor);
-        e.setCursor(item);
+        player.setItemOnCursor(item);
         if (reactorManager.getPlayersInCoolDown().get(player.getUniqueId()) == null) {
             reactorManager.getPlayersInCoolDown().put(player.getUniqueId(), 1);
         }else {

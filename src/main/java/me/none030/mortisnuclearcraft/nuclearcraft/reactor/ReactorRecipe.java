@@ -78,14 +78,14 @@ public class ReactorRecipe {
     public void endProcess(ReactorData data) {
         ItemStack output = data.getOutput();
         if (output == null) {
-            data.setOutput(this.output);
+            data.setOutput(this.output.clone());
         }else {
             output.setAmount(output.getAmount() + this.output.getAmount());
             data.setOutput(output);
         }
         ItemStack waste = data.getWaste();
         if (waste == null) {
-            data.setWaste(this.waste);
+            data.setWaste(this.waste.clone());
         }else {
             waste.setAmount(waste.getAmount() + this.waste.getAmount());
             data.setWaste(waste);
@@ -119,7 +119,8 @@ public class ReactorRecipe {
         }
         int water = reactorManager.getReactor().getWater(data.getStructureId(), data.getCore());
         if (!hasEnoughWater(water)) {
-            reactorManager.getReactor().explode(reactorManager, data.getCore());
+            structure.destroy(data.getCore());
+            reactorManager.getReactor().explode(reactorManager.getRadiationManager(), data.getCore());
             data.empty();
             reactorManager.delete(data);
             return;

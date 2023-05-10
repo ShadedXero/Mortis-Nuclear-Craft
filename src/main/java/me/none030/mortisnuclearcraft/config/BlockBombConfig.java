@@ -57,6 +57,7 @@ public class BlockBombConfig extends Config {
             double radiation = blockBomb.getDouble("radiation-per-second");
             boolean vehicles = blockBomb.getBoolean("destroy-vehicle");
             boolean drain = blockBomb.getBoolean("drain");
+            boolean fire = blockBomb.getBoolean("fire");
             List<String> structureIds = blockBomb.getStringList("structures");
             if (structureIds.size() == 0) {
                 getPlugin().getLogger().severe("Detected a problem with 'structures' in '" + key + "' section at 'block-bombs' section in bombs.yml");
@@ -71,7 +72,12 @@ public class BlockBombConfig extends Config {
                 }
                 structures.add(structure);
             }
-            BlockBomb bomb = new BlockBomb(key, name, strength, radius, duration, radiation, vehicles, drain, structures);
+            boolean blockDamage = blockBomb.getBoolean("block-damage");
+            boolean townyBlockDamage = blockBomb.getBoolean("towny-block-damage");
+            boolean blockRegen = blockBomb.getBoolean("block-regen");
+            boolean townyRegen = blockBomb.getBoolean("towny-regen");
+            long regenTime = blockBomb.getLong("regen-time");
+            BlockBomb bomb = new BlockBomb(key, name, strength, radius, duration, radiation, vehicles, drain, fire, blockDamage, townyBlockDamage, blockRegen, townyRegen, regenTime, structures);
             getConfigManager().getManager().getBlockBombManager().getBlockBombById().put(key, bomb);
         }
     }

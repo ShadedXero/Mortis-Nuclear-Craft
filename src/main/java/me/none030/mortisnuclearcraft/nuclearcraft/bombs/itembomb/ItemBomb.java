@@ -5,7 +5,6 @@ import me.none030.mortisnuclearcraft.nuclearcraft.bombs.Bomb;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
@@ -20,24 +19,12 @@ public class ItemBomb extends Bomb {
     private final String id;
     private final ItemStack item;
     private final int speed;
-    private final int strength;
-    private final int radius;
-    private final int duration;
-    private final double radiation;
-    private final boolean vehicles;
-    private final boolean drain;
 
-    public ItemBomb(String id, ItemStack item, int speed, int strength, int radius, int duration, double radiation, boolean vehicles, boolean drain) {
-        super(radius);
+    public ItemBomb(String id, ItemStack item, int speed, int strength, int radius, long duration, double radiation, boolean vehicles, boolean drain, boolean fire, boolean blockDamage, boolean townyBlockDamage, boolean blockRegen, boolean townyBlockRegen, long regenTime) {
+        super(strength, radius, duration, radiation, vehicles, drain, fire, blockDamage, townyBlockDamage, blockRegen, townyBlockRegen, regenTime);
         this.id = id;
         this.item = item;
         this.speed = speed;
-        this.strength = strength;
-        this.radius = radius;
-        this.duration = duration;
-        this.radiation = radiation;
-        this.vehicles = vehicles;
-        this.drain = drain;
         createBomb();
     }
 
@@ -60,7 +47,7 @@ public class ItemBomb extends Bomb {
                 firework.setCustomNameVisible(false);
                 firework.detonate();
                 if (projectile.isOnGround() || projectile.isInLava() || projectile.isInPowderedSnow() || projectile.isInWaterOrBubbleColumn()) {
-                    explode(itemBombManager, projectile.getLocation());
+                    explode(itemBombManager.getRadiationManager(), projectile.getLocation());
                     projectile.remove();
                     cancel();
                 }
@@ -68,19 +55,12 @@ public class ItemBomb extends Bomb {
         }.runTaskTimer(plugin, 0L, 1L);
     }
 
-
-
     public void giveBomb(Player player) {
         if (player.getInventory().firstEmpty() == -1) {
             player.getWorld().dropItemNaturally(player.getLocation(), item);
         } else {
             player.getInventory().addItem(item);
         }
-    }
-
-    private void explode(ItemBombManager itemBombManager, Location loc) {
-        explode(loc, strength, vehicles, drain);
-        radiate(itemBombManager.getRadiationManager(), loc, duration, radiation);
     }
 
     public String getId() {
@@ -93,30 +73,5 @@ public class ItemBomb extends Bomb {
 
     public int getSpeed() {
         return speed;
-    }
-
-    public int getStrength() {
-        return strength;
-    }
-
-    public int getDuration() {
-        return duration;
-    }
-
-    public double getRadiation() {
-        return radiation;
-    }
-
-    public boolean isVehicles() {
-        return vehicles;
-    }
-
-    public boolean isDrain() {
-        return drain;
-    }
-
-    @Override
-    public int getRadius() {
-        return radius;
     }
 }
