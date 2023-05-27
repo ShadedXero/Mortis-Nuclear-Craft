@@ -1,0 +1,235 @@
+# This file is to configure items
+items:
+  COAL:
+    material: COAL
+    amount: 1
+  CHARCOAL:
+    material: CHARCOAL
+    amount: 1
+  COAL_BLOCK:
+    material: COAL_BLOCK
+    amount: 1
+  BLAZE_ROD:
+    material: BLAZE_ROD
+    amount: 1
+  LAVA_BUCKET:
+    material: LAVA_BUCKET
+    amount: 1
+  RED_NETHER_BRICKS:
+    material: RED_NETHER_BRICKS
+    amount: 1
+  SPONGE:
+    material: SPONGE
+    amount: 1
+  AIR:
+    material: AIR
+    amount: 1
+  SUGAR:
+    material: SUGAR
+    amount: 1
+  MELON_SEEDS:
+    material: MELON_SEEDS
+    amount: 1
+  IRON_BLOCK:
+    material: IRON_BLOCK
+    amount: 1
+  FIREWORK_ROCKET:
+    material: FIREWORK_ROCKET
+    amount: 1
+  FILTER:
+    material: BLACK_STAINED_GLASS_PANE
+    amount: 1
+    name: " "
+  ANIMATION-1:
+    material: PINK_STAINED_GLASS_PANE
+    amount: 1
+    name: " "
+  ANIMATION-2:
+    material: RED_STAINED_GLASS_PANE
+    amount: 1
+    name: " "
+  REDSTONE_MODE:
+    material: REDSTONE_TORCH
+    amount: 1
+    name: "&cRedstone Mode"
+    lore:
+      - "&7Currently in redstone mode"
+  MANUAL_MODE:
+    material: SOUL_TORCH
+    amount: 1
+    name: "&bManual Mode"
+    lore:
+      - "&7Currently in manual mode"
+  WASTE:
+    material: LIME_STAINED_GLASS_PANE
+    amount: 1
+    name: "&aWaste"
+  FUEL:
+    material: ORANGE_STAINED_GLASS_PANE
+    amount: 1
+    name: "&aFuel"
+    lore:
+      - "&7Needs fuel to process"
+  FUEL_CALCULATOR:
+    material: LIGHT_BLUE_STAINED_GLASS_PANE
+    amount: 1
+    name: "&bFuel: %fuel%"
+    lore:
+      - "&7Calculates the fuel power"
+  WATER_CALCULATOR:
+    material: LIGHT_BLUE_STAINED_GLASS_PANE
+    amount: 1
+    name: "&bWater: %water%"
+    lore:
+      - "&7Calculates the water source"
+  INPUT:
+    material: LIME_STAINED_GLASS_PANE
+    amount: 1
+    name: "&aInput"
+  OUTPUT:
+    material: LIME_STAINED_GLASS_PANE
+    amount: 1
+    name: "&aOutput"
+  TOGGLE_ITEM:
+    material: COMPASS
+    amount: 1
+    name: "&aRadiation Toggle"
+    lore:
+      - "&7Toggles on/off your radiation display"
+  TIMER:
+    material: COMPASS
+    amount: 1
+    name: "&aTimer"
+    lore:
+      - "&7%time% left for the bomb to explode"
+  NO_TIMER:
+    material: RED_STAINED_GLASS_PANE
+    amount: 1
+    name: "&cTimer"
+    lore:
+      - "&7No Timer"
+  TIMER_SETTER:
+    material: NAME_TAG
+    amount: 1
+    name: "&bTimer Setter"
+    lore:
+      - "&7Click here to set the timer"
+  TIMER_SET:
+    material: NAME_TAG
+    amount: 1
+    name: "&cTimer Setter"
+    lore:
+      - "&7There is a ongoing timer"
+  FUEL_ROD:
+    material: END_ROD
+    amount: 1
+    name: "&aFuel Rod"
+    lore:
+      - "&7Fuel used by nuclear reactors"
+  URANIUM_ORE:
+    material: FLINT
+    amount: 1
+    name: "&aUranium Ore"
+    lore:
+      - "&7Must be enriched before use"
+  KRYPTONITE:
+    material: EMERALD
+    amount: 1
+    name: "&aKryptonite"
+  ATOMIC_BOMB:
+    material: FIREWORK_ROCKET
+    amount: 1
+    name: "&aAtomic Bomb"
+    lore:
+      - "&7Nuclear weapon that derives"
+      - "&7its power from fission reactions"
+  RADIATION_PILL:
+    material: MELON_SEEDS
+    amount: 1
+    name: "&bRadiation pill"
+    lore:
+      - "&7Treats radiation sickness"
+  U-235:
+    material: NETHER_BRICK
+    amount: 1
+    name: "&bU-235"
+    lore:
+      - "&7Used as a fuel in the nuclear reactor"
+  U-238:
+    material: ROTTEN_FLESH
+    amount: 1
+    name: "&bU-238"
+    lore:
+      - "&7Radioactive by-product of nuclear reactions"
+  U-235x10:
+    material: NETHER_BRICK
+    amount: 10
+    name: "&bU-235"
+    lore:
+      - "&7Used as a fuel in the nuclear reactor"
+  U-238x5:
+    material: ROTTEN_FLESH
+    amount: 5
+    name: "&bU-238"
+    lore:
+      - "&7Radioactive by-product of nuclear reactions"
+  U-235x11:
+    material: NETHER_BRICK
+    amount: 11
+    name: "&bU-235"
+    lore:
+      - "&7Used as a fuel in the nuclear reactor"
+  U-238x2:
+    material: ROTTEN_FLESH
+    amount: 2
+    name: "&bU-238"
+    lore:
+      - "&7Radioactive by-product of nuclear reactions"
+  HAZMAT_HELMET:
+    material: GOLDEN_HELMET
+    amount: 1
+    name: "&aHazmat Helmet"
+    lore:
+      - "&7Provides protection from radiation"
+  HAZMAT_CHESTPLATE:
+    material: GOLDEN_CHESTPLATE
+    amount: 1
+    name: "&aHazmat Chestplate"
+    lore:
+      - "&7Provides protection from radiation"
+  HAZMAT_LEGGINGS:
+    material: GOLDEN_LEGGINGS
+    amount: 1
+    name: "&aHazmat Boots"
+    lore:
+      - "&7Provides protection from radiation"
+  HAZMAT_BOOTS:
+    material: GOLDEN_BOOTS
+    amount: 1
+    name: "&aHazmat Boots"
+    lore:
+      - "&7Provides protection from radiation"
+  EXAMPLE_HELMET:
+    material: DIAMOND_HELMET
+    amount: 1
+    name: "&cExample Helmet"
+    lore:
+      - "&7Increases your radiation"
+  EXAMPLE_CHESTPLATE:
+    material: DIAMOND_CHESTPLATE
+    amount: 1
+    name: "&cExample Chestplate"
+    lore:
+      - "&7Increases your radiation"
+  EXAMPLE_LEGGINGS:
+    material: DIAMOND_LEGGINGS
+    amount: 1
+    name: "&cExample Leggings"
+    lore:
+      - "&7Increases your radiation"
+  EXAMPLE_BOOTS:
+    material: DIAMOND_BOOTS
+    amount: 1
+    name: "&cExample Boots"
+    lore:
+      - "&7Increases your radiation"
