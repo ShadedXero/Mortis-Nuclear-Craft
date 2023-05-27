@@ -1,6 +1,0 @@
-nuclear-waste:
-  EXAMPLE_WASTE:
-    item: U-238
-    radiation: 5
-    type: BOTH # BLOCK | ITEM | BOTH
-    radius: 5
