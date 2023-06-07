@@ -12,7 +12,7 @@ public final class MortisNuclearCraft extends JavaPlugin {
     private boolean weaponMechanics;
     private boolean brewery;
     private boolean qav;
-    private boolean filteredHoppers;
+    private boolean hopper;
     private NuclearCraftManager nuclearCraftManager;
 
     @Override
@@ -25,7 +25,7 @@ public final class MortisNuclearCraft extends JavaPlugin {
         weaponMechanics = getServer().getPluginManager().getPlugin("WeaponMechanics") != null;
         brewery = getServer().getPluginManager().getPlugin("Brewery") != null;
         qav = getServer().getPluginManager().getPlugin("QualityArmoryVehicles") != null;
-        filteredHoppers = getServer().getPluginManager().getPlugin("FilteredHoppers") != null;
+        hopper = getServer().getPluginManager().getPlugin("MortisHoppers") != null;
         nuclearCraftManager = new NuclearCraftManager();
     }
 
@@ -57,8 +57,8 @@ public final class MortisNuclearCraft extends JavaPlugin {
         return qav;
     }
 
-    public boolean hasFilteredHoppers() {
-        return filteredHoppers;
+    public boolean hasHopper() {
+        return hopper;
     }
 
     public NuclearCraftManager getNuclearCraftManager() {

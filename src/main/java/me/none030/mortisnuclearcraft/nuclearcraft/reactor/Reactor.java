@@ -1,5 +1,9 @@
 package me.none030.mortisnuclearcraft.nuclearcraft.reactor;
 
+import me.none030.mortishoppers.data.HopperData;
+import me.none030.mortishoppers.utils.HopperMode;
+import me.none030.mortishoppers.utils.HopperStatus;
+import me.none030.mortisnuclearcraft.MortisNuclearCraft;
 import me.none030.mortisnuclearcraft.nuclearcraft.bombs.Bomb;
 import me.none030.mortisnuclearcraft.structures.Structure;
 import me.none030.mortisnuclearcraft.utils.Fuel;
@@ -17,6 +21,7 @@ import java.util.List;
 
 public class Reactor extends Bomb {
 
+    private final MortisNuclearCraft plugin = MortisNuclearCraft.getInstance();
     private final List<Structure> structures;
     private final List<ReactorRecipe> recipes;
     private final HashMap<String, ReactorRecipe> recipeById;
@@ -175,19 +180,56 @@ public class Reactor extends Bomb {
     }
 
     public void removeItems(Inventory inv, ReactorData data) {
+        Location location = inv.getLocation();
+        if (location == null) {
+            return;
+        }
+        HopperData hopperData = new HopperData(location);
+        removeOutput(inv, data, hopperData);
+        removeWaste(inv, data, hopperData);
+    }
+
+    private void removeOutput(Inventory inv, ReactorData data, HopperData hopperData) {
         if (inv.firstEmpty() == -1) {
             return;
         }
         ItemStack output = data.getOutput();
         if (output != null) {
+            if (hopperData.getStatus().equals(HopperStatus.ENABLED)) {
+                if (hopperData.getMode().equals(HopperMode.WHITELIST)) {
+                    if (!hopperData.canGoThrough(output)) {
+                        return;
+                    }
+                } else {
+                    if (hopperData.canGoThrough(output)) {
+                        return;
+                    }
+                }
+            }
             inv.addItem(output);
             data.setOutput(null);
         }
+    }
+
+    private void removeWaste(Inventory inv, ReactorData data, HopperData hopperData) {
         if (inv.firstEmpty() == -1) {
             return;
         }
         ItemStack waste = data.getWaste();
         if (waste != null) {
+            if (plugin.hasHopper()) {
+                if (hopperData.getStatus().equals(HopperStatus.ENABLED)) {
+                    if (hopperData.getMode().equals(HopperMode.WHITELIST)) {
+                        if (!hopperData.canGoThrough(waste)) {
+                            return;
+                        }
+                    } else {
+                        if (hopperData.canGoThrough(waste)) {
+                            return;
+                        }
+                    }
+                }
+            }
             inv.addItem(waste);
             data.setWaste(null);
         }

@@ -28,10 +28,10 @@ public class CentrifugeRecipe {
         if ((this.input1 != null && input1 == null) || (this.input2 != null && input2 == null)) {
             return false;
         }
-        if ((this.input1 != null && !this.input1.isSimilar(input1)) || (this.input2 !=null && !this.input2.isSimilar(input2))) {
+        if ((this.input1 != null && !this.input1.isSimilar(input1)) || (this.input2 != null && !this.input2.isSimilar(input2))) {
             return false;
         }
-        return (this.input1 != null && input1.getAmount() >= this.input1.getAmount()) && (this.input2 != null && input2.getAmount() >= this.input2.getAmount());
+        return (this.input1 == null || input1.getAmount() >= this.input1.getAmount()) && (this.input2 == null || input2.getAmount() >= this.input2.getAmount());
     }
 
     public boolean hasEnoughFuel(int power) {

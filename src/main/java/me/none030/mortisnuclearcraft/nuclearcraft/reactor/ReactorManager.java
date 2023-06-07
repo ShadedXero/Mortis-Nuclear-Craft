@@ -86,9 +86,9 @@ public class ReactorManager extends Manager {
                     }
                     reactor.checkInHoppers(data, structure);
                     reactor.checkFuel(data, structure);
+                    reactor.checkOutHoppers(data, structure);
                     if (data.getTimer() <= 0) {
                         recipe.endProcess(data);
-                        reactor.checkOutHoppers(data, structure);
                     } else {
                         data.setTimer(data.getTimer() - 1);
                     }

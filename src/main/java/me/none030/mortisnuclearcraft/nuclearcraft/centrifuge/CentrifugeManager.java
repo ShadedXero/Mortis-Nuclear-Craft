@@ -61,6 +61,7 @@ public class CentrifugeManager extends Manager {
                         delete(data);
                         continue;
                     }
+                    centrifuge.checkOutHoppers(data, structure);
                     if (data.getProcess() == null) {
                         continue;
                     }

@@ -9,7 +9,7 @@ public class MessageUtils {
     private String message;
 
     public MessageUtils(String message) {
-        this.message = Objects.requireNonNullElse(message, "");
+        this.message = Objects.requireNonNullElse(message, " ");
     }
 
     public String color() {

@@ -6,7 +6,7 @@
 
     <groupId>me.none030</groupId>
     <artifactId>MortisNuclearCraft</artifactId>
-    <version>3.3</version>
+    <version>3.5</version>
     <packaging>jar</packaging>
 
     <name>MortisNuclearCraft</name>
@@ -41,7 +41,7 @@
                             <relocations>
                                 <relocation>
                                     <pattern>com.jeff_media.customblockdata</pattern>
-                                    <shadedPattern>me.none030.mortisnuclearcraft</shadedPattern>
+                                    <shadedPattern>me.none030.mortisnuclearcraft.customblockdata</shadedPattern>
                                 </relocation>
                             </relocations>
                             <createDependencyReducedPom>false</createDependencyReducedPom>
@@ -68,6 +68,10 @@
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
         <repository>
+            <id>glaremasters repo</id>
+            <url>https://repo.glaremasters.me/repository/towny/</url>
+        </repository>
+        <repository>
             <id>nexus</id>
             <name>Lumine Releases</name>
             <url>https://mvn.lumine.io/repository/maven-public/</url>
@@ -79,10 +83,6 @@
         <repository>
             <id>jeff-media-gbr</id>
             <url>https://hub.jeff-media.com/nexus/repository/jeff-media-public/</url>
-        </repository>
-        <repository>
-            <id>glaremasters repo</id>
-            <url>https://repo.glaremasters.me/repository/towny/</url>
         </repository>
     </repositories>
 
@@ -107,17 +107,15 @@
         </dependency>
         <dependency>
             <groupId>com.shampaggon</groupId>
-            <artifactId>crackshot</artifactId>
+            <artifactId>CrackShot</artifactId>
             <version>0.98.11</version>
-            <scope>system</scope>
-            <systemPath>C:/Users/7th Genration/Downloads/CrackShot.jar</systemPath>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>me.deecaad</groupId>
-            <artifactId>weaponmechanics</artifactId>
-            <version>1.14.12</version>
-            <scope>system</scope>
-            <systemPath>C:/Users/7th Genration/Downloads/WeaponMechanics-1.14.12.jar</systemPath>
+            <artifactId>WeaponMechanics</artifactId>
+            <version>2.3.0</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.DieReicheErethons</groupId>
@@ -129,8 +127,7 @@
             <groupId>me.zombie_striker</groupId>
             <artifactId>QualityArmoryVehicles</artifactId>
             <version>1.14.12</version>
-            <scope>system</scope>
-            <systemPath>C:/Users/7th Genration/Downloads/QualityArmoryVehicles.jar</systemPath>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.jeff_media</groupId>
@@ -139,17 +136,10 @@
             <scope>compile</scope>
         </dependency>
         <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>CustomBlockData</artifactId>
-            <version>2.2.0</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.jeff_media</groupId>
-            <artifactId>FilteredHoppers</artifactId>
-            <version>1.8.1</version>
-            <scope>system</scope>
-            <systemPath>C:/Users/7th Genration/Downloads/FilteredHoppers-1.8.1.jar</systemPath>
+            <groupId>me.none030</groupId>
+            <artifactId>MortisHoppers</artifactId>
+            <version>1.0</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 </project>

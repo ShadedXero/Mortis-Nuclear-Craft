@@ -64,44 +64,12 @@
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.ow2.asm:asm-tree:9.4" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.palmergames.bukkit.towny:towny:0.99.0.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: io.lumine:Mythic-Dist:5.2.0" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: com.shampaggon:crackshot:0.98.11">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/CrackShot.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library name="Maven: me.deecaad:weaponmechanics:1.14.12">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/WeaponMechanics-1.14.12.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" scope="PROVIDED" name="Maven: com.shampaggon:CrackShot:0.98.11" level="project" />
+    <orderEntry type="library" scope="PROVIDED" name="Maven: me.deecaad:WeaponMechanics:2.3.0" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: com.github.DieReicheErethons:Brewery:3.1.1" level="project" />
     <orderEntry type="library" scope="PROVIDED" name="Maven: org.jetbrains:annotations:16.0.2" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: me.zombie_striker:QualityArmoryVehicles:1.14.12">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/QualityArmoryVehicles.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" scope="PROVIDED" name="Maven: me.zombie_striker:QualityArmoryVehicles:1.14.12" level="project" />
     <orderEntry type="library" name="Maven: com.jeff_media:CustomBlockData:2.2.0" level="project" />
-    <orderEntry type="module-library">
-      <library name="Maven: com.jeff_media:FilteredHoppers:1.8.1">
-        <CLASSES>
-          <root url="jar://$USER_HOME$/Downloads/FilteredHoppers-1.8.1.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
+    <orderEntry type="library" scope="PROVIDED" name="Maven: me.none030:MortisHoppers:1.0" level="project" />
   </component>
 </module>

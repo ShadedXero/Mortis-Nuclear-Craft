@@ -70,6 +70,7 @@ public class Structure {
     }
 
     public void destroy(Location core) {
+        core.getBlock().setType(Material.AIR);
         for (StructureBlock block : getBlocks()) {
             Vector vector = block.getVector();
             Location loc = vector.getLocation(core);
