@@ -9,7 +9,7 @@ softdepend:
   - WeaponMechanics
   - Brewery
   - QualityArmoryVehicles
-  - FilteredHoppers
+  - MortisHoppers
 commands:
   nuclearcraft:
     aliases:
