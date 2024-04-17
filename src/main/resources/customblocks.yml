@@ -1,0 +1,9 @@
+custom-blocks:
+  MYSTIC_SHRINE:
+    item: MYSTIC_SHRINE
+    keys:
+      - mystic_shrine
+  CRYSTAL_PRISM:
+    item: CRYSTAL_PRISM
+    keys:
+      - crystal_prism

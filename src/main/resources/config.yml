@@ -1,0 +1,4 @@
+database:
+  file: data\database
+  username: user
+  password: pass

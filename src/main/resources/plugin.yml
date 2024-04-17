@@ -1,0 +1,17 @@
+name: MortisNuclearCraft
+version: '${project.version}'
+main: com.mortisdevelopment.mortisnuclearcraft.MortisNuclearCraft
+api-version: 1.13
+softdepend:
+  - Towny
+  - MythicMobs
+  - CrackShot
+  - WeaponMechanics
+  - Brewery
+  - QualityArmoryVehicles
+  - MortisHoppers
+description: Mortis Nuclear Craft Plugin
+commands:
+  nuclearcraft:
+    aliases:
+      - mortisnuclearcraft

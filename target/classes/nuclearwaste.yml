@@ -1,0 +1,21 @@
+nuclear-waste:
+  EXAMPLE_ITEM_WASTE:
+    type: ITEM # ITEM | DROPPED | BLOCK | CUSTOM_BLOCK
+    object: U-238
+    radiation: 5
+    radius: 5
+  EXAMPLE_DROPPED_WASTE:
+    type: DROPPED # ITEM | DROPPED | BLOCK | CUSTOM_BLOCK
+    object: U-238
+    radiation: 5
+    radius: 5
+  EXAMPLE_CUSTOM_BLOCK_WASTE:
+    type: CUSTOM_BLOCK # ITEM | DROPPED | BLOCK | CUSTOM_BLOCK
+    object: CRYSTAL_PRISM
+    radiation: 5
+    radius: 5
+  EXAMPLE_BLOCK:
+    type: BLOCK # ITEM | DROPPED | BLOCK | CUSTOM_BLOCK
+    object: EMERALD_BLOCK
+    radiation: 5
+    radius: 5

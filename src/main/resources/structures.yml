@@ -1,0 +1,176 @@
+settings:
+  radiusX: 3
+  radiusY: 3
+  radiusZ: 3
+structures:
+  HYDROGEN_BOMB:
+    core-block:
+      strict: false
+      material: COAL_BLOCK
+      data: minecraft:coal_block
+      vector: 0, 0, 0
+    11c98726-98e1-4d68-be62-34fa54e3f2d7:
+      strict: false
+      material: IRON_BLOCK
+      data: minecraft:iron_block
+      vector: -1, -1, 0
+    9e31b059-49f4-45aa-86cd-42b6740caea1:
+      strict: false
+      material: IRON_BLOCK
+      data: minecraft:iron_block
+      vector: 0, -1, -1
+    2910937f-7988-4117-a544-7c2e84bd79d2:
+      strict: false
+      material: IRON_BLOCK
+      data: minecraft:iron_block
+      vector: 0, -1, 0
+    94b73c23-c9b1-46fd-919d-a6cad177fc61:
+      strict: false
+      material: IRON_BLOCK
+      data: minecraft:iron_block
+      vector: 0, -1, 1
+    7ca77540-7434-4ec2-80c9-2712c172661a:
+      strict: false
+      material: IRON_BLOCK
+      data: minecraft:iron_block
+      vector: 1, -1, 0
+  CENTRIFUGE:
+    core-block:
+      strict: false
+      material: FURNACE
+      data: minecraft:furnace[facing=west,lit=false]
+      vector: 0, 0, 0
+    1a49dbad-f32f-42e6-90de-40275326648e:
+      strict: false
+      material: IRON_BLOCK
+      data: minecraft:iron_block
+      vector: 0, 1, 0
+    5af58e9c-dd5b-4cb9-823f-cfe156a2328e:
+      strict: false
+      material: IRON_BLOCK
+      data: minecraft:iron_block
+      vector: 0, 2, 0
+  REACTOR:
+    core-block:
+      strict: false
+      material: FURNACE
+      data: minecraft:furnace[facing=west,lit=false]
+      vector: 0, 0, 0
+    ffe896ee-c4ee-4038-9700-8527ac20819d:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: 1, 0, -1
+    56611685-bdc7-42f2-8904-ff1c2c42a255:
+      strict: false
+      material: CHISELED_QUARTZ_BLOCK
+      data: minecraft:chiseled_quartz_block
+      vector: 1, 0, 0
+    60fd65a5-4bd4-4528-b25f-0a346917d46b:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: 1, 0, 1
+    7caba38f-c585-4d85-b316-be1cde8e5229:
+      strict: false
+      material: LIGHTNING_ROD
+      data: minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]
+      vector: 1, 1, 0
+    b458e440-b3cf-4135-9402-08a3c9583460:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: 2, 0, 0
+  REACTOR_2:
+    core-block:
+      strict: false
+      material: FURNACE
+      data: minecraft:furnace[facing=north,lit=false]
+      vector: 0, 0, 0
+    32a2c9a4-c821-49b4-ade8-fac85e78bd73:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: -1, 0, 1
+    05714caa-13e1-4169-8d91-4c4f010855bb:
+      strict: false
+      material: CHISELED_QUARTZ_BLOCK
+      data: minecraft:chiseled_quartz_block
+      vector: 0, 0, 1
+    e1e1e18a-6e33-47c2-8262-a80c642f1ff8:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: 0, 0, 2
+    30aff654-099d-465e-ae84-6788ea086891:
+      strict: false
+      material: LIGHTNING_ROD
+      data: minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]
+      vector: 0, 1, 1
+    44329151-67ac-43ae-ae31-e9faa346aa91:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: 1, 0, 1
+  REACTOR_3:
+    core-block:
+      strict: false
+      material: FURNACE
+      data: minecraft:furnace[facing=east,lit=false]
+      vector: 0, 0, 0
+    01b69972-b796-4fd8-bf9b-1af1a68ddaa7:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: -2, 0, 0
+    031dc604-a219-4fdc-a1a8-c35b6c91e2b9:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: -1, 0, -1
+    bf689b46-a635-4830-8e14-7c65878f9d54:
+      strict: false
+      material: CHISELED_QUARTZ_BLOCK
+      data: minecraft:chiseled_quartz_block
+      vector: -1, 0, 0
+    35c5bbeb-ef2e-4002-9960-74dd945ea8c1:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: -1, 0, 1
+    6fa8b4ea-4788-4814-9972-01af39c4d288:
+      strict: false
+      material: LIGHTNING_ROD
+      data: minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]
+      vector: -1, 1, 0
+  REACTOR_4:
+    core-block:
+      strict: false
+      material: FURNACE
+      data: minecraft:furnace[facing=south,lit=false]
+      vector: 0, 0, 0
+    89ccabe2-1712-4661-872e-86584ba1670b:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: -1, 0, -1
+    79414316-ddb3-4d86-9431-6372b0c5e631:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: 0, 0, -2
+    37edc39d-0d42-456d-a002-58816178583b:
+      strict: false
+      material: CHISELED_QUARTZ_BLOCK
+      data: minecraft:chiseled_quartz_block
+      vector: 0, 0, -1
+    6f92a779-dabc-41d4-8397-ccf5c9478546:
+      strict: false
+      material: LIGHTNING_ROD
+      data: minecraft:lightning_rod[facing=up,powered=false,waterlogged=false]
+      vector: 0, 1, -1
+    ef89d435-bfba-496d-a7ef-8c8304f9754b:
+      strict: false
+      material: CAULDRON
+      data: minecraft:cauldron
+      vector: 1, 0, -1
